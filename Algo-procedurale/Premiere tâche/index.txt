@@ -1,0 +1,56 @@
+program ProduitDePoints;
+
+// Fonction qui calcule le produit scalaire de deux vecteurs
+function dot_product(var v1, v2: array of real): real;
+var
+  i: integer;
+begin
+  Result := 0;
+  for i := Low(v1) to High(v1) do
+    Result := Result + v1[i] * v2[i];
+end;
+
+// Algorithme qui vérifie l'orthogonalité de n couples de vecteurs
+procedure verifier_orthogonalite(n: integer);
+var
+  i, j: integer;
+  v1, v2: array of real;
+  ps: real;
+begin
+  for i := 1 to n do
+  begin
+    // Lire les composantes des vecteurs v1 et v2
+    SetLength(v1, dimension_des_vecteurs); // Remplacez dimension_des_vecteurs par la taille des vecteurs
+    SetLength(v2, dimension_des_vecteurs);
+
+    WriteLn('Entrez les composantes du vecteur v1 : ');
+    for j := Low(v1) to High(v1) do
+      Read(v1[j]);
+
+    WriteLn('Entrez les composantes du vecteur v2 : ');
+    for j := Low(v2) to High(v2) do
+      Read(v2[j]);
+
+    // Appeler la fonction dot_product pour calculer le produit scalaire
+    ps := dot_product(v1, v2);
+
+    // Vérifier l'orthogonalité en fonction du produit scalaire
+    if ps = 0 then
+      WriteLn('Les vecteurs sont orthogonaux.')
+    else
+      WriteLn('Les vecteurs ne sont pas orthogonaux.');
+  end;
+end;
+
+const
+  dimension_des_vecteurs = 3; // Remplacez par la dimension réelle de vos vecteurs
+
+var
+  n: integer;
+
+begin
+  Write('Entrez le nombre de couples de vecteurs : ');
+  ReadLn(n);
+
+  verifier_orthogonalite(n);
+end.

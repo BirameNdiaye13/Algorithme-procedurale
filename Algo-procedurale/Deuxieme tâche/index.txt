@@ -1,0 +1,51 @@
+program TriInsertion;
+
+const
+  MAX = 100;
+
+var
+  tableau: array[1..MAX] of integer;
+  taille, i, j, valeurTemp: integer;
+
+procedure TriInsertion(var tab: array of integer; taille: integer);
+var
+  i, j, valeurTemp: integer;
+begin
+  for i := 2 to taille do
+  begin
+    valeurTemp := tab[i];
+    j := i;
+    while (j > 1) and (tab[j - 1] > valeurTemp) do
+    begin
+      tab[j] := tab[j - 1];
+      j := j - 1;
+    end;
+    tab[j] := valeurTemp;
+  end;
+end;
+
+procedure AfficherTableau(var tab: array of integer; taille: integer);
+var
+  i: integer;
+begin
+  for i := 1 to taille do
+    write(tab[i], ' ');
+  writeln;
+end;
+
+begin
+  // Entrée : Demander à l'utilisateur de saisir la taille du tableau et ses éléments
+  write('Entrez la taille du tableau : ');
+  readln(taille);
+
+  writeln('Entrez les éléments du tableau : ');
+  for i := 1 to taille do
+    read(tableau[i]);
+
+  // Tri par insertion
+  TriInsertion(tableau, taille);
+
+  // Affichage du tableau trié
+  writeln('Tableau trié : ');
+  AfficherTableau(tableau, taille);
+end.
